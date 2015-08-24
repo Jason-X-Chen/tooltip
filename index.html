@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ToolTip信息显示</title>
+<link href="style/reset.css" rel="stylesheet" type="text/css" />
+<style>
+	body{font-size: 14px;line-height: 1.8;}
+	#content{width:500px;margin:0 auto;margin-top:20px;padding:20px;background-color:#fff;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px; box-shadow:0 0 25px #ccc;-moz-box-shadow:0 0 25px #ccc;-webkit-box-shadow:0 0 25px #ccc;}
+	#content h2 {color:#333;}
+    #content .tooltip {color:#0099FF; cursor:help;}
+	.tooltip-box {display:block;background:#fff;line-height:1.6;border:1px solid #66CCFF;color:#333;padding:10px;font-size:12px;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;overflow:auto;}
+	#mycard img { float:left;width:100px;height:100px;padding:10px;}
+	#mycard p {float:left;width:150px;padding:0 10px;}
+</style>
+</head>
+
+<body>
+<div id="content">
+    <h2>原生JavaScript实现ToolTip效果</h2>
+
+    <p>ToolTip效果是非常常见的网页特效，它可以在用户将指针放置在控件上时为用户显示提示信息。
+        比如简称文字显示一行文字全称，例：<a class="tooltip" id="tooltip1">中国</a>， <a class="tooltip" id="tooltip2">NBA</a>。
+        又比如显示一段文字，例：唐诗三百首中的<a class="tooltip" id="tooltip3">春晓</a>你会么？如果不看tooltip提示你背不出来的话，那么你可要加油了。
+    </p>
+
+    <p>ToolTip效果还可以用来显示图片，例：<a class="tooltip" id="tooltip4">西湖美景</a>。当然显示一块儿带格式的内容也不在话下，例：
+        <a class="tooltip" id="tooltip5">我的资料</a>。
+    </p>
+</div>
+<script src="js/tooltip.js"></script>
+</body>
+</html>
