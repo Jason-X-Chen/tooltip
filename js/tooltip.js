@@ -1,12 +1,49 @@
-function addEvent(element,type,callback){
-	if(element.addEventListener){
-		element.addEventListener(type,callback,false);
-	}else if(element.attachEvent){
-		element.attachEvent('on'+type,callback);
-	}else{
-		element['on'+type](callback);
+var EventUtil = {
+	//添加事件
+	addEvent: function(element,type,callback){
+		if(element.addEventListener){
+			element.addEventListener(type,callback,false);
+		}else if(element.attachEvent){
+			element.attachEvent('on'+type,callback);
+		}else{
+			element['on'+type] = callback;
+		}
+	},
+	//移除事件
+	removeEvent: function(element,type,callback){
+		if(element.removeEventListener){
+			element.removeEventListener(type,callback,false);
+		}else if(element.detachEvent){
+			element.detachEvent('on'+type,callback);
+		}else{
+			element['on'+type] = null;
+		}
+	},
+	//获取事件对象
+	getEvent: function(event){
+		return event?event:window.event;
+	},
+	//获取事件目标
+	getTarget: function(event){
+		return event.target||event.srcElement;
+	},
+	//取消默认行为
+	preventDefault: function(event){
+		if(event.preventDefault){
+			event.preventDefault();
+		}else{
+			event.returnValue = false;
+		}
+	},
+	//阻止冒泡
+	stopPropagation: function(event){
+		if(event.stopPropagation){
+			event.stopPropagation();
+		}else{
+			event.cancelBubble = true;
+		}
 	}
-}
+};
 var content = document.getElementById("content");
 var isIE = navigator.userAgent.indexOf("MSIE")>-1;
 //pare - ToolTip超链接元素
@@ -41,7 +78,7 @@ function showToolTip(pare,id,html,width,height){
 		toolTipBox.style.left = left + "px";
 		toolTipBox.style.top = top + "px";
 		//离开时延时显示
-		addEvent(pare,'mouseleave',function(){
+		EventUtil.addEvent(pare,'mouseleave',function(){
 			setTimeout(function(){toolTipBox.style.display="none"},300);
 		});
 	}else{//有tooltip提示框则显示
@@ -49,9 +86,10 @@ function showToolTip(pare,id,html,width,height){
 	}
 }
 //使用事件冒泡机制触发tooltip显示
-addEvent(content,"mouseover",function(e){
-	var event = e || window.event;
-	var target = event.target || event.srcElement;
+EventUtil.addEvent(content,"mouseover",function(e){
+	//获取触发目标
+	var event = EventUtil.getEvent(e);
+	var target = EventUtil.getTarget(event);
 	if(target.className=="tooltip"){
 		var _id;
 		var _html;
