@@ -86,7 +86,9 @@ function showToolTip(pare,id,html,width,height){
 	}
 }
 //使用事件冒泡机制触发tooltip显示
-EventUtil.addEvent(content,"mouseover",function(e){
+EventUtil.addEvent(content,"mouseover", ditermineTarget);
+//确定被触发的tooltip
+function ditermineTarget(e){
 	//获取触发目标
 	var event = EventUtil.getEvent(e);
 	var target = EventUtil.getTarget(event);
@@ -105,7 +107,7 @@ EventUtil.addEvent(content,"mouseover",function(e){
 				break;
 			case "tooltip3":
 				_id = "t3";
-				_html = "<h2>春晓</h2><p>春眠不觉晓，</p><p>处处闻啼鸟。</p><p>夜来风雨声，</p><p>花落知多少。</p>>";
+				_html = "<h2>春晓</h2><p>春眠不觉晓，</p><p>处处闻啼鸟。</p><p>夜来风雨声，</p><p>花落知多少。</p>";
 				_width = 100;
 				break;
 			case "tooltip4":
@@ -123,4 +125,4 @@ EventUtil.addEvent(content,"mouseover",function(e){
 		}
 		showToolTip(target,_id,_html,_width);
 	}		
-});	
+}	
